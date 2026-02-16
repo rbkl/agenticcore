@@ -1,0 +1,41 @@
+{
+  "name": "@agenticcore/api",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "build": "nest build",
+    "start": "nest start",
+    "dev": "nest start --watch",
+    "start:prod": "node dist/main",
+    "test": "vitest run --passWithNoTests",
+    "test:watch": "vitest",
+    "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agenticcore/agents": "workspace:*",
+    "@agenticcore/domain-policy": "workspace:*",
+    "@agenticcore/domain-product": "workspace:*",
+    "@agenticcore/domain-rating": "workspace:*",
+    "@agenticcore/governance": "workspace:*",
+    "@agenticcore/persistence": "workspace:*",
+    "@agenticcore/shared": "workspace:*",
+    "@nestjs/common": "^11.0.1",
+    "@nestjs/core": "^11.0.1",
+    "@nestjs/cqrs": "^11.0.0",
+    "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/swagger": "^11.0.3",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.1",
+    "reflect-metadata": "^0.2.2",
+    "rxjs": "^7.8.1",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
+    "@nestjs/testing": "^11.0.1",
+    "@types/node": "^25.2.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}

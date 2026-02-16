@@ -1,0 +1,80 @@
+{
+  "code": "homeowners",
+  "name": "Homeowners Insurance",
+  "lobCode": "homeowners",
+  "version": "1.0",
+  "description": "Standard homeowners insurance policy (HO-3)",
+  "effectiveDate": "2026-01-01",
+  "states": ["CA", "TX", "NY", "FL", "IL", "PA", "OH", "GA", "NC", "MI"],
+  "coverages": [
+    {
+      "code": "dwelling",
+      "name": "Dwelling Coverage (Coverage A)",
+      "required": true,
+      "defaultLimit": { "amount": 250000, "currency": "USD" },
+      "defaultDeductible": { "amount": 1000, "currency": "USD" },
+      "availableLimits": [100000, 150000, 200000, 250000, 300000, 400000, 500000, 750000, 1000000],
+      "availableDeductibles": [500, 1000, 2500, 5000, 10000]
+    },
+    {
+      "code": "other-structures",
+      "name": "Other Structures (Coverage B)",
+      "required": true,
+      "defaultLimit": { "amount": 25000, "currency": "USD" },
+      "defaultDeductible": { "amount": 1000, "currency": "USD" },
+      "availableLimits": [10000, 25000, 50000, 75000, 100000],
+      "availableDeductibles": [500, 1000, 2500]
+    },
+    {
+      "code": "personal-property",
+      "name": "Personal Property (Coverage C)",
+      "required": true,
+      "defaultLimit": { "amount": 125000, "currency": "USD" },
+      "defaultDeductible": { "amount": 1000, "currency": "USD" },
+      "availableLimits": [50000, 75000, 100000, 125000, 175000, 250000],
+      "availableDeductibles": [500, 1000, 2500]
+    },
+    {
+      "code": "loss-of-use",
+      "name": "Loss of Use (Coverage D)",
+      "required": true,
+      "defaultLimit": { "amount": 50000, "currency": "USD" },
+      "defaultDeductible": { "amount": 0, "currency": "USD" },
+      "availableLimits": [25000, 50000, 75000, 100000],
+      "availableDeductibles": [0]
+    },
+    {
+      "code": "personal-liability",
+      "name": "Personal Liability (Coverage E)",
+      "required": true,
+      "defaultLimit": { "amount": 100000, "currency": "USD" },
+      "defaultDeductible": { "amount": 0, "currency": "USD" },
+      "availableLimits": [100000, 300000, 500000, 1000000],
+      "availableDeductibles": [0]
+    },
+    {
+      "code": "medical-payments",
+      "name": "Medical Payments (Coverage F)",
+      "required": true,
+      "defaultLimit": { "amount": 1000, "currency": "USD" },
+      "defaultDeductible": { "amount": 0, "currency": "USD" },
+      "availableLimits": [1000, 2500, 5000],
+      "availableDeductibles": [0]
+    }
+  ],
+  "risks": [
+    {
+      "type": "property",
+      "name": "Property",
+      "required": true,
+      "fields": [
+        { "name": "address", "type": "string", "required": true },
+        { "name": "constructionType", "type": "enum", "required": true, "enumValues": ["frame", "masonry", "fire_resistive", "superior"] },
+        { "name": "yearBuilt", "type": "number", "required": true },
+        { "name": "squareFeet", "type": "number", "required": true },
+        { "name": "numberOfStories", "type": "number", "required": false },
+        { "name": "roofType", "type": "string", "required": false }
+      ]
+    }
+  ]
+}

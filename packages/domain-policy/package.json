@@ -1,0 +1,23 @@
+{
+  "name": "@agenticcore/domain-policy",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agenticcore/shared": "workspace:*",
+    "xstate": "^5.19.2",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}

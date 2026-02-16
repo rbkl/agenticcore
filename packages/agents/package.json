@@ -1,0 +1,27 @@
+{
+  "name": "@agenticcore/agents",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@agenticcore/domain-policy": "workspace:*",
+    "@agenticcore/domain-rating": "workspace:*",
+    "@agenticcore/governance": "workspace:*",
+    "@agenticcore/persistence": "workspace:*",
+    "@agenticcore/shared": "workspace:*",
+    "@anthropic-ai/sdk": "^0.39.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^25.2.3",
+    "typescript": "^5.7.3",
+    "vitest": "^3.0.4"
+  }
+}

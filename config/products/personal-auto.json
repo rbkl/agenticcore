@@ -1,0 +1,83 @@
+{
+  "code": "personal-auto",
+  "name": "Personal Auto Insurance",
+  "lobCode": "personal-auto",
+  "version": "1.0",
+  "description": "Standard personal automobile insurance policy",
+  "effectiveDate": "2026-01-01",
+  "states": ["CA", "TX", "NY", "FL", "IL", "PA", "OH", "GA", "NC", "MI"],
+  "coverages": [
+    {
+      "code": "liability",
+      "name": "Bodily Injury & Property Damage Liability",
+      "required": true,
+      "defaultLimit": { "amount": 100000, "currency": "USD" },
+      "defaultDeductible": { "amount": 0, "currency": "USD" },
+      "availableLimits": [25000, 50000, 100000, 250000, 500000],
+      "availableDeductibles": [0]
+    },
+    {
+      "code": "collision",
+      "name": "Collision Coverage",
+      "required": false,
+      "defaultLimit": { "amount": 50000, "currency": "USD" },
+      "defaultDeductible": { "amount": 500, "currency": "USD" },
+      "availableLimits": [25000, 50000, 75000, 100000],
+      "availableDeductibles": [250, 500, 1000, 2000]
+    },
+    {
+      "code": "comprehensive",
+      "name": "Comprehensive Coverage",
+      "required": false,
+      "defaultLimit": { "amount": 50000, "currency": "USD" },
+      "defaultDeductible": { "amount": 500, "currency": "USD" },
+      "availableLimits": [25000, 50000, 75000, 100000],
+      "availableDeductibles": [250, 500, 1000, 2000]
+    },
+    {
+      "code": "uninsured-motorist",
+      "name": "Uninsured/Underinsured Motorist",
+      "required": false,
+      "defaultLimit": { "amount": 100000, "currency": "USD" },
+      "defaultDeductible": { "amount": 0, "currency": "USD" },
+      "availableLimits": [25000, 50000, 100000, 250000],
+      "availableDeductibles": [0]
+    },
+    {
+      "code": "medical-payments",
+      "name": "Medical Payments Coverage",
+      "required": false,
+      "defaultLimit": { "amount": 5000, "currency": "USD" },
+      "defaultDeductible": { "amount": 0, "currency": "USD" },
+      "availableLimits": [1000, 2000, 5000, 10000],
+      "availableDeductibles": [0]
+    }
+  ],
+  "risks": [
+    {
+      "type": "vehicle",
+      "name": "Vehicle",
+      "required": true,
+      "fields": [
+        { "name": "vin", "type": "string", "required": true },
+        { "name": "year", "type": "number", "required": true },
+        { "name": "make", "type": "string", "required": true },
+        { "name": "model", "type": "string", "required": true },
+        { "name": "usage", "type": "enum", "required": true, "enumValues": ["pleasure", "commute", "business"] },
+        { "name": "annualMileage", "type": "number", "required": false }
+      ]
+    },
+    {
+      "type": "driver",
+      "name": "Driver",
+      "required": true,
+      "fields": [
+        { "name": "licenseNumber", "type": "string", "required": true },
+        { "name": "licenseState", "type": "string", "required": true },
+        { "name": "dateOfBirth", "type": "date", "required": true },
+        { "name": "gender", "type": "enum", "required": false, "enumValues": ["male", "female", "non_binary"] },
+        { "name": "maritalStatus", "type": "enum", "required": false, "enumValues": ["single", "married", "divorced", "widowed"] }
+      ]
+    }
+  ]
+}

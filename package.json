@@ -1,0 +1,25 @@
+{
+  "name": "agenticcore",
+  "version": "0.1.0",
+  "private": true,
+  "description": "AI-Agent-First Insurance Core Platform",
+  "packageManager": "pnpm@9.15.4",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "lint": "turbo run lint",
+    "dev": "turbo run dev --parallel",
+    "db:generate": "pnpm --filter @agenticcore/persistence db:generate",
+    "db:migrate": "pnpm --filter @agenticcore/persistence db:migrate",
+    "db:seed": "pnpm --filter @agenticcore/persistence db:seed",
+    "clean": "turbo run clean"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3",
+    "typescript": "^5.7.3"
+  }
+}
