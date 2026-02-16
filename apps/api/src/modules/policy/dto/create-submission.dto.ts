@@ -1,5 +1,5 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { IsString, IsDateString, IsOptional, IsArray, ValidateNested, IsNumber, IsEnum } from 'class-validator';
+import { IsString, IsDateString, IsOptional, IsArray, ValidateNested, IsNumber, IsEnum, IsObject } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateSubmissionDto {
@@ -26,6 +26,7 @@ export class AddRiskDto {
   riskType!: string;
 
   @ApiProperty({ description: 'Risk data' })
+  @IsObject()
   riskData!: Record<string, unknown>;
 }
 

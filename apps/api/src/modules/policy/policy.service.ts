@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PolicyAggregate } from '@agenticcore/domain-policy';
-import { EventStoreRepository, PolicyRepository, PolicyProjection } from '@agenticcore/persistence';
+import { EventStoreRepository, PolicyRepository, PolicyProjection, db } from '@agenticcore/persistence';
 import { generateId, generatePolicyNumber, DomainEventMetadata, DomainEvent } from '@agenticcore/shared';
 import { CreateSubmissionDto, AddRiskDto, SelectCoverageDto } from './dto/create-submission.dto';
 
@@ -141,11 +141,14 @@ export class PolicyService {
   private async saveAndProject(aggregate: PolicyAggregate): Promise<void> {
     const events = aggregate.uncommittedEvents;
     const expectedVersion = aggregate.version - events.length;
-    await this.eventStore.appendEvents([...events], expectedVersion);
 
-    for (const event of events) {
-      await this.projection.handleEvent(event);
-    }
+    // Wrap event store append + projection in a single transaction
+    // so they succeed or fail atomically — prevents orphaned events
+    // with missing read model rows (the FK issue).
+    await db.transaction(async (tx) => {
+      await this.eventStore.appendEvents([...events], expectedVersion, tx);
+      await this.projection.handleEvents([...events], tx);
+    });
 
     aggregate.clearUncommittedEvents();
   }

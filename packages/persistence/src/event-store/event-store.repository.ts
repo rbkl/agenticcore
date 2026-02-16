@@ -1,6 +1,6 @@
 import { eq, and, asc } from 'drizzle-orm';
 import { DomainEvent, ConcurrencyError } from '@agenticcore/shared';
-import { db, Database } from '../database';
+import { db, Database, DatabaseOperations } from '../database';
 import { eventStore, eventStoreSnapshots } from '../schema/event-store';
 
 export class EventStoreRepository {
@@ -30,13 +30,14 @@ export class EventStoreRepository {
       }));
   }
 
-  async appendEvents(events: DomainEvent[], expectedVersion: number): Promise<void> {
+  async appendEvents(events: DomainEvent[], expectedVersion: number, tx?: DatabaseOperations): Promise<void> {
     if (events.length === 0) return;
 
+    const database = tx || this.database;
     const aggregateId = events[0]!.aggregateId;
 
     // Check for concurrency conflicts
-    const latestEvents = await this.database
+    const latestEvents = await database
       .select({ version: eventStore.version })
       .from(eventStore)
       .where(eq(eventStore.aggregateId, aggregateId))
@@ -60,7 +61,7 @@ export class EventStoreRepository {
       metadata: event.metadata as unknown as Record<string, unknown>,
     }));
 
-    await this.database.insert(eventStore).values(rows);
+    await database.insert(eventStore).values(rows);
   }
 
   async getSnapshot(aggregateId: string): Promise<{ version: number; state: Record<string, unknown> } | null> {
